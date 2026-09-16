@@ -17,10 +17,25 @@ public class Player : MonoBehaviour
             bombOffset(Vector3.up);
         }
 
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            Debug.Log(normalize(new Vector2(3,4)));
+            Debug.Log(normalize(new Vector2(-3,2)));
+            Debug.Log(normalize(new Vector2(1.5f,3.5f)));
+        }
+
     }
 
     void bombOffset(Vector3 offset)
     {
         Instantiate(bombPrefab, transform.position + offset, Quaternion.identity);
+    }
+
+    Vector2 normalize(Vector2 inVector)
+    {
+        float magnitude = Mathf.Sqrt(Mathf.Pow(inVector.x, 2) + Mathf.Pow(inVector.y, 2));
+        Vector2 outVector = new Vector2(inVector.x / magnitude, inVector.y / magnitude);
+
+        return outVector;
     }
 }
