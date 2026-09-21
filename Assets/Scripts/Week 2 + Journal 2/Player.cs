@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public List<Transform> asteroidTransforms;
     
     public int NumberOfBombs; 
+
+    public float ratio;
+
     // Update is called once per frame
     void Update()
     {
@@ -34,9 +37,16 @@ public class Player : MonoBehaviour
             SpawnBombTrail(0, NumberOfBombs);
         }
 
+        //Checking if bomb spawns on a random corner of the player
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            SpawnBombOnRandomCorner(0);
+            SpawnBombOnRandomCorner(1.5f);
+        }
+
+        //Checking if player warps to enemy
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+        {
+            warpPlayer(enemyTransform, ratio);
         }
 
     }
@@ -75,9 +85,6 @@ public class Player : MonoBehaviour
         // variable to generate a randoom number that will determine which corner
         int corner = Random.Range(0, 4);
 
-        // Offset for each bomb
-        inDistance += 1;
-
         //Conditional statements to determine the corner where the bomb will be spawnedaccording to the random number
          if (corner == 0)
         {
@@ -96,12 +103,14 @@ public class Player : MonoBehaviour
             Instantiate(bombPrefab, transform.position + Vector3.down + Vector3.right * inDistance, Quaternion.identity);
         }
             
-
-       
     }
 
+    //Warping player to the enemy
     void warpPlayer(Transform target, float ratio)
     {
-        
+
+        Vector3 newPos = Vector3.Lerp(transform.position, target.position, ratio);
+        transform.position = newPos;
+
     }
 }
