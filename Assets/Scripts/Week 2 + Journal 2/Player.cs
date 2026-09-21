@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public GameObject bombPrefab;
     public List<Transform> asteroidTransforms;
     
+    public int inNumberOfBombs; 
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +28,11 @@ public class Player : MonoBehaviour
             Debug.Log(normalize(new Vector2(1.5f,3.5f)));
         }
 
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            SpawnBombTrail(1, inNumberOfBombs);
+        }
+
     }
 
     // Spawning a bomb above the player using methods and offsets
@@ -42,6 +48,16 @@ public class Player : MonoBehaviour
         Vector2 outVector = new Vector2(inVector.x / magnitude, inVector.y / magnitude);
 
         return outVector;
+    }
+
+    public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
+    {
+        for (int i = 0; i < inNumberOfBombs; i++)
+        {
+            inBombSpacing += 1;
+            Vector3 bombPosition = transform.position + Vector3.down * inBombSpacing;
+            Instantiate(bombPrefab, bombPosition, Quaternion.identity);
+        }
     }
 
     void warpPlayer(Transform target, float ratio)
