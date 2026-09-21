@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public GameObject bombPrefab;
     public List<Transform> asteroidTransforms;
     
-    public int inNumberOfBombs; 
+    public int NumberOfBombs; 
     // Update is called once per frame
     void Update()
     {
@@ -28,9 +28,15 @@ public class Player : MonoBehaviour
             Debug.Log(normalize(new Vector2(1.5f,3.5f)));
         }
 
+        //Checking if bomb trail spawns below player
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
-            SpawnBombTrail(1, inNumberOfBombs);
+            SpawnBombTrail(0, NumberOfBombs);
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            SpawnBombOnRandomCorner(0);
         }
 
     }
@@ -50,14 +56,48 @@ public class Player : MonoBehaviour
         return outVector;
     }
 
+    //Spawning a bomb trail below player 
     public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
     {
+        // For Loop that spawns bombs based on inputted value
         for (int i = 0; i < inNumberOfBombs; i++)
         {
+            // Offset for each bomb 
             inBombSpacing += 1;
             Vector3 bombPosition = transform.position + Vector3.down * inBombSpacing;
             Instantiate(bombPrefab, bombPosition, Quaternion.identity);
         }
+    }
+
+    //Spawning a bomb on a random corner of the player
+    public void SpawnBombOnRandomCorner(float inDistance)
+    {
+        // variable to generate a randoom number that will determine which corner
+        int corner = Random.Range(0, 4);
+
+        // Offset for each bomb
+        inDistance += 1;
+
+        //Conditional statements to determine the corner where the bomb will be spawnedaccording to the random number
+         if (corner == 0)
+        {
+            Instantiate(bombPrefab, transform.position + Vector3.up + Vector3.left * inDistance, Quaternion.identity);
+        }
+        else if (corner == 1)
+        {
+            Instantiate(bombPrefab, transform.position + Vector3.up + Vector3.right * inDistance, Quaternion.identity);
+        }
+        else if (corner == 2)
+        {
+            Instantiate(bombPrefab, transform.position + Vector3.down + Vector3.left * inDistance, Quaternion.identity);
+        }
+        else if (corner == 3)
+        {
+            Instantiate(bombPrefab, transform.position + Vector3.down + Vector3.right * inDistance, Quaternion.identity);
+        }
+            
+
+       
     }
 
     void warpPlayer(Transform target, float ratio)
