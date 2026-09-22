@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public GameObject bombPrefab;
     public List<Transform> asteroidTransforms;
     
-    public int NumberOfBombs; 
+    public int NumberOfTrailBombs; 
+    public float bombTrailSpacing;
 
     public float ratio;
 
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
         //Checking if bomb trail spawns below player
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
-            SpawnBombTrail(0, NumberOfBombs);
+            SpawnBombTrail(bombTrailSpacing, NumberOfTrailBombs);
         }
 
         //Checking if bomb spawns on a random corner of the player
