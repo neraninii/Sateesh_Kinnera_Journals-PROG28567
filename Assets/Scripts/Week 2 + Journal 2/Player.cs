@@ -49,6 +49,11 @@ public class Player : MonoBehaviour
             warpPlayer(enemyTransform, ratio);
         }
 
+        if (Keyboard.current.dKey.isPressed)
+        {
+            DetectAsteroids(3, asteroidTransforms);
+        }
+
     }
 
     // Spawning a bomb above the player using methods and offsets
@@ -113,4 +118,31 @@ public class Player : MonoBehaviour
         transform.position = newPos;
 
     }
+
+
+    //Detecting asteroids with Debug.DrawLine
+     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
+    {
+
+        //Creating a for loop to get the Vector3 positions of each asteroid in the list
+        for (int i = 0; i < inAsteroids.Count; i++) 
+        {
+            Vector3 asteroidsPos = inAsteroids[i].position; 
+
+            //Setting a range from the player position
+            float playerX = inMaxRange + transform.position.x;
+            float playerY = inMaxRange + transform.position.y;
+
+            //Conditional to draw line from player
+            if (asteroidsPos.y < playerY && asteroidsPos.y > -playerY && asteroidsPos.x < playerX && asteroidsPos.x > -playerX)
+            {
+                Debug.DrawLine(transform.position, asteroidsPos, Color.green);
+            }
+
+            
+        }
+    }
+
+    
+
 }
