@@ -10,12 +10,16 @@ public class Player : MonoBehaviour
     
     public int NumberOfTrailBombs; 
     public float bombTrailSpacing;
-
     public float ratio;
+
+    public float moveSpeed = 1f;
+
 
     // Update is called once per frame
     void Update()
     {
+
+        PlayerMovement();
 
         // Checking if bomb spawns above player
         if (Keyboard.current.bKey.wasPressedThisFrame)
@@ -142,6 +146,33 @@ public class Player : MonoBehaviour
 
             
         }
+    }
+
+    //Method for player movement 
+    public void PlayerMovement()
+    {
+
+        if (Keyboard.current.leftArrowKey.isPressed)
+        {
+            transform.position += Vector3.left * moveSpeed;
+        }
+
+        if (Keyboard.current.rightArrowKey.isPressed)
+        {
+            transform.position += Vector3.right * moveSpeed;
+        }
+
+        if (Keyboard.current.upArrowKey.isPressed)
+        {
+            transform.position += Vector3.up * moveSpeed;
+        }
+
+        if (Keyboard.current.downArrowKey.isPressed)
+        {
+            transform.position += Vector3.down * moveSpeed;
+        }
+
+
     }
 
     
