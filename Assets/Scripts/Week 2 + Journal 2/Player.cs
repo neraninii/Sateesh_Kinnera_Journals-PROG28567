@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class Player : MonoBehaviour
     public float ratio;
 
     public float moveSpeed = 1f;
+
+    public float maxSpeed = 1f; 
+    public float accelerationTime = 1f;
+
+    public float acceleration;
+
+    public Vector3 velocity;
 
 
     // Update is called once per frame
@@ -152,25 +160,38 @@ public class Player : MonoBehaviour
     public void PlayerMovement()
     {
 
+        acceleration = maxSpeed/accelerationTime; 
+
+
         if (Keyboard.current.leftArrowKey.isPressed)
         {
-            transform.position += Vector3.left * moveSpeed;
+            velocity += Time.deltaTime * acceleration * Vector3.left;
         }
 
         if (Keyboard.current.rightArrowKey.isPressed)
         {
-            transform.position += Vector3.right * moveSpeed;
+            velocity += Time.deltaTime * acceleration * Vector3.right;
         }
 
         if (Keyboard.current.upArrowKey.isPressed)
         {
-            transform.position += Vector3.up * moveSpeed;
+            velocity += Time.deltaTime * acceleration * Vector3.up;
         }
 
         if (Keyboard.current.downArrowKey.isPressed)
         {
-            transform.position += Vector3.down * moveSpeed;
+            velocity += Time.deltaTime * acceleration * Vector3.down;
         }
+
+
+        transform.position += Time.deltaTime * velocity;
+
+        if (velocity.magnitude > maxSpeed)
+        {
+            velocity = maxSpeed * velocity.normalized;
+        }
+
+        Debug.Log(velocity.magnitude);
 
 
     }
