@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public float acceleration;
 
     public Vector3 velocity;
+
+    public float deceleration = 1f;
+
 
 
     // Update is called once per frame
@@ -167,20 +170,26 @@ public class Player : MonoBehaviour
         {
             velocity += Time.deltaTime * acceleration * Vector3.left;
         }
-
-        if (Keyboard.current.rightArrowKey.isPressed)
+        
+        else if  (Keyboard.current.rightArrowKey.isPressed)
         {
             velocity += Time.deltaTime * acceleration * Vector3.right;
         }
 
-        if (Keyboard.current.upArrowKey.isPressed)
+        else if (Keyboard.current.upArrowKey.isPressed)
         {
             velocity += Time.deltaTime * acceleration * Vector3.up;
         }
 
-        if (Keyboard.current.downArrowKey.isPressed)
+        else if (Keyboard.current.downArrowKey.isPressed)
         {
             velocity += Time.deltaTime * acceleration * Vector3.down;
+        }
+
+        else
+        {
+            velocity -= Time.deltaTime * deceleration * velocity;
+            //velocity -= Time.deltaTime * deceleration * Vector3.zero
         }
 
 
@@ -195,6 +204,7 @@ public class Player : MonoBehaviour
 
 
     }
+
 
     
 
