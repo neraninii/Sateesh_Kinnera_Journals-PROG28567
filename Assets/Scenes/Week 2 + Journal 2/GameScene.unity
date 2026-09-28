@@ -233,10 +233,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 8438977231294163930, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
-      propertyPath: arrivalDistance
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -530,10 +526,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8438977231294163930, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
-      propertyPath: maxFloatDistance
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -825,10 +817,6 @@ PrefabInstance:
     - target: {fileID: 7969683946929540427, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
       propertyPath: m_Name
       value: Asteroid (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8438977231294163930, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
-      propertyPath: arrivalDistance
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
