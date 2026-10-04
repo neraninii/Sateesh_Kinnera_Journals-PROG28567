@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
 
     public float deceleration = 1f;
 
+    public float radarRadius = 3f;
+    public int radarSideCount = 8;
+
 
 
     // Update is called once per frame
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour
         {
             DetectAsteroids(3, asteroidTransforms);
         }
+
+        DrawRadar(radarRadius, radarSideCount);
 
     }
 
@@ -201,6 +206,45 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log(velocity.magnitude);
+
+
+    }
+
+    private void DrawRadar(float radius, int numberOfSides)
+    {
+        float stepAngle = 360.0f / numberOfSides;
+        List<Vector3> points = new();
+
+        stepAngle *= Mathf.Deg2Rad;
+        float currentAngle = stepAngle;
+
+        for (int i = 0; i < numberOfSides; i++)
+        {
+            float xPos = Mathf.Cos(currentAngle) * radius;
+            float yPos = Mathf.Sin(currentAngle) * radius;
+
+            Vector3 newPoint = new Vector2(xPos, yPos);
+            points.Add(newPoint);
+
+            currentAngle += stepAngle;
+
+        }
+
+        for (int i = 0; i < numberOfSides - 1; i++)
+        {
+            Vector3 startPoint = transform.position + points[i];
+            Vector3 endPoint = transform.position + points[i + 1];
+
+            Debug.DrawLine(startPoint, endPoint, Color.green);
+
+            if (i == numberOfSides - 2)
+            {
+                startPoint = transform.position + points[i + 1];
+                endPoint = transform.position + points[0];
+
+                Debug.DrawLine(startPoint, endPoint, Color.green);
+            }
+        }
 
 
     }
