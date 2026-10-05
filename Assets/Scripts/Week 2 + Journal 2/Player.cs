@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
     public Transform enemyTransform;
     public GameObject bombPrefab;
     public List<Transform> asteroidTransforms;
+
+    public GameObject powerUpPrefab;
     
     public int NumberOfTrailBombs; 
     public float bombTrailSpacing;
@@ -26,6 +29,9 @@ public class Player : MonoBehaviour
 
     public float radarRadius = 3f;
     public int radarSideCount = 8;
+
+    public float powerUpRadius = 5f;
+    public int powerUpNumber = 5; 
 
 
 
@@ -74,6 +80,8 @@ public class Player : MonoBehaviour
         }
 
         EnemyRadar(radarRadius, radarSideCount);
+
+        SpawnPowerUps(powerUpRadius, powerUpNumber);
 
     }
 
@@ -262,13 +270,34 @@ public class Player : MonoBehaviour
             }
         }
 
-        
+    }
+
+    //Spawning Power Ups around the player
+    public void SpawnPowerUps(float radius, int numberOfPowerups)
+    {
+        float stepAngle = 360.0f / numberOfPowerups;
+        List<Vector3> powerUps = new();
+
+        stepAngle *= Mathf.Deg2Rad;
+        float currentAngle = stepAngle;
 
 
+        for (int i = 0; i < numberOfPowerups; i++)
+        {
+            float xPos = Mathf.Cos(currentAngle) * radius;
+            float yPos = Mathf.Sin(currentAngle) * radius;
 
-        
+            Vector3 newPowerUp = new Vector2(xPos, yPos);
+            powerUps.Add(newPowerUp);
 
+            currentAngle += stepAngle; 
 
+            Vector3 powerUpPos = transform.position + powerUps[i];
+            Instantiate(powerUpPrefab, powerUpPos, Quaternion.identity);
+
+        }
+
+         
     }
 
 
