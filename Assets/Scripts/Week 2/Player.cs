@@ -81,7 +81,10 @@ public class Player : MonoBehaviour
 
         EnemyRadar(radarRadius, radarSideCount);
 
-        SpawnPowerUps(powerUpRadius, powerUpNumber);
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            SpawnPowerUps(powerUpRadius, powerUpNumber);
+        }
 
     }
 
