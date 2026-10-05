@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
             DetectAsteroids(3, asteroidTransforms);
         }
 
-        DrawRadar(radarRadius, radarSideCount);
+        EnemyRadar(radarRadius, radarSideCount);
 
     }
 
@@ -210,15 +210,30 @@ public class Player : MonoBehaviour
 
     }
 
-    private void DrawRadar(float radius, int numberOfSides)
+    //Detecting enemy within player's radar
+    private void EnemyRadar(float radius, int circlePoints)
     {
-        float stepAngle = 360.0f / numberOfSides;
+        Color RadarColor = Color.green;  
+
+        float stepAngle = 360.0f / circlePoints;
         List<Vector3> points = new();
 
         stepAngle *= Mathf.Deg2Rad;
         float currentAngle = stepAngle;
 
-        for (int i = 0; i < numberOfSides; i++)
+        //Checking if enemy position is in radius of player
+
+        float enemyDistance = Vector3.Distance(transform.position, enemyTransform.position); 
+
+        if (enemyDistance <= radius)
+        {
+            //Changing the colour of the radar
+            RadarColor = Color.red;
+        }
+
+
+        //Adding points of the circle to the list of points
+        for (int i = 0; i < circlePoints; i++)
         {
             float xPos = Mathf.Cos(currentAngle) * radius;
             float yPos = Mathf.Sin(currentAngle) * radius;
@@ -230,24 +245,33 @@ public class Player : MonoBehaviour
 
         }
 
-        for (int i = 0; i < numberOfSides - 1; i++)
+        //Drawing the lines of the circle
+        for (int i = 0; i < circlePoints - 1; i++)
         {
             Vector3 startPoint = transform.position + points[i];
             Vector3 endPoint = transform.position + points[i + 1];
 
-            Debug.DrawLine(startPoint, endPoint, Color.green);
+            Debug.DrawLine(startPoint, endPoint, RadarColor);
 
-            if (i == numberOfSides - 2)
+            if (i == circlePoints - 2)
             {
                 startPoint = transform.position + points[i + 1];
                 endPoint = transform.position + points[0];
 
-                Debug.DrawLine(startPoint, endPoint, Color.green);
+                Debug.DrawLine(startPoint, endPoint, RadarColor);
             }
         }
 
+        
+
+
+
+        
+
 
     }
+
+
 
 
     
