@@ -284,7 +284,7 @@ public class Player : MonoBehaviour
         stepAngle *= Mathf.Deg2Rad;
         float currentAngle = stepAngle;
 
-
+        //Adding positions of each power up depending on the number of power ups
         for (int i = 0; i < numberOfPowerups; i++)
         {
             float xPos = Mathf.Cos(currentAngle) * radius;
