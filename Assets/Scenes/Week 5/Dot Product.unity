@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba8d55e3fac54790a4c9bca76e379de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Turret
-  angularSpeed: 90
+  angularSpeed: 180
   target: {fileID: 90796779}
 --- !u!212 &357905892
 SpriteRenderer:
