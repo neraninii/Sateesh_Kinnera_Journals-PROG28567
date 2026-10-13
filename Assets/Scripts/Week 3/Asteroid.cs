@@ -16,6 +16,11 @@ public class Asteroid : MonoBehaviour
     public float x; 
     public float y;
 
+    public Transform player; 
+
+    public float speed; 
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,9 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        PlayerContact();
+
         //Checking asteroid movement
         if (Keyboard.current.aKey.isPressed)
         {
@@ -70,6 +78,21 @@ public class Asteroid : MonoBehaviour
 
 
 
+    }
+
+
+    public void PlayerContact()
+    {
+
+        float distanceToAsteroid = Vector3.Distance(transform.position, player.position);
+        Vector3 oppositeDirection = transform.position - player.position; 
+
+
+        if (distanceToAsteroid <= 1)
+        {
+            transform.position += Time.deltaTime * oppositeDirection * speed;
+        }
+        
     }
 
 
