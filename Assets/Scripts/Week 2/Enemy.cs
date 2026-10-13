@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Threading;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class Enemy : MonoBehaviour
     public float acceleration;
 
     public Vector3 velocity;
+    public float angularSpeed;
+
+    public GameObject enemyBombPrefab;
+
+    public float timer;
     
     private void Update()
     {
@@ -24,6 +30,7 @@ public class Enemy : MonoBehaviour
         //RandomAsteroidWarp();
 
         PlayerFollowing(); 
+        PlayerDetection();
     }
 
     public void RandomAsteroidWarp()
@@ -65,6 +72,44 @@ public class Enemy : MonoBehaviour
             velocity = maxSpeed * velocity.normalized;
         }
         
+    }
+
+    public void PlayerDetection()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        float deltaAngle = ComputeShortestAngle(transform.up, direction);
+
+        float rotateDirection = Mathf.Sign(deltaAngle);
+        float angleStep = angularSpeed * Time.deltaTime;
+
+        if (angleStep < Mathf.Abs(deltaAngle))
+        {
+            transform.Rotate(0, 0, rotateDirection * angularSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Rotate(0, 0, deltaAngle);
+        }
+
+         timer += Time.deltaTime;
+
+
+        if (timer > 3)
+        {
+            Instantiate(enemyBombPrefab, transform.position + transform.up, Quaternion.identity);
+            timer = 0;
+
+        }
+
+
+    }
+
+    private float ComputeShortestAngle(Vector3 a, Vector3 b)
+    {
+        float angleA = Mathf.Atan2(a.y, a.x) * Mathf.Rad2Deg;
+        float angleB = Mathf.Atan2(b.y, b.x) * Mathf.Rad2Deg;
+
+        return Mathf.DeltaAngle(angleA, angleB);
     }
 
 }

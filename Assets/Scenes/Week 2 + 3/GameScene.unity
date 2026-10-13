@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114516115454935764, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
       propertyPath: speed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114516115454935764, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
       propertyPath: player
@@ -510,6 +510,14 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114516115454935764, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
+      propertyPath: angularSpeed
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114516115454935764, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
+      propertyPath: enemyBombPrefab
+      value: 
+      objectReference: {fileID: 1273894435109820, guid: b262926197932c945b68169dd6fd6c5c, type: 3}
     - target: {fileID: 114516115454935764, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
       propertyPath: asteroidTransforms.Array.size
       value: 10
