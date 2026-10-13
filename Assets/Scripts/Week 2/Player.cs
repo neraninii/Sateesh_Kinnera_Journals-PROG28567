@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public float powerUpRadius = 5f;
     public int powerUpNumber = 5; 
 
+    public float rotationAngle;
 
 
     // Update is called once per frame
@@ -85,6 +86,10 @@ public class Player : MonoBehaviour
         {
             SpawnPowerUps(powerUpRadius, powerUpNumber);
         }
+
+        playerRotate();
+        PlayerAttack();
+
 
     }
 
@@ -297,15 +302,35 @@ public class Player : MonoBehaviour
 
             Vector3 powerUpPos = transform.position + powerUps[i];
             Instantiate(powerUpPrefab, powerUpPos, Quaternion.identity);
-
         }
 
          
     }
 
 
+    public void playerRotate()
+    {
 
+        if (Keyboard.current.zKey.isPressed)
+        {
+           transform.Rotate(0, 0, rotationAngle * Time.deltaTime);
+        }
+        
+        if  (Keyboard.current.xKey.isPressed)
+        {
+            transform.Rotate(0, 0, -rotationAngle * Time.deltaTime);
+        }
 
-    
+    }
+
+    public void PlayerAttack() 
+    {
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            Instantiate(bombPrefab, transform.position + transform.up, Quaternion.identity); 
+        }
+       
+    }
+
 
 }
