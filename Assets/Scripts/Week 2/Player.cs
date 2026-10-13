@@ -327,7 +327,7 @@ public class Player : MonoBehaviour
     {
         if (Keyboard.current.cKey.wasPressedThisFrame)
         {
-            Instantiate(bombPrefab, transform.position + transform.up, Quaternion.identity); 
+            Instantiate(powerUpPrefab, transform.position + transform.up, Quaternion.identity); 
         }
        
     }
