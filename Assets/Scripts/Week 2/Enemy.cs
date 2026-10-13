@@ -9,11 +9,21 @@ public class Enemy : MonoBehaviour
     public float motion = 0;
     public List<Transform> asteroidTransforms;
     Vector3 asteroidPos;
+
+    public Transform player; 
+    public float maxSpeed = 1f; 
+    public float accelerationTime = 1f;
+
+    public float acceleration;
+
+    public Vector3 velocity;
     
     private void Update()
     {
         
-        RandomAsteroidWarp();
+        //RandomAsteroidWarp();
+
+        PlayerFollowing(); 
     }
 
     public void RandomAsteroidWarp()
@@ -38,6 +48,23 @@ public class Enemy : MonoBehaviour
         transform.position = currentPosition * speed;
         
 
+    }
+
+    public void PlayerFollowing()
+    {
+        acceleration = maxSpeed/accelerationTime; 
+
+        Vector3 direction = (player.position - transform.position).normalized; 
+
+        velocity += Time.deltaTime * direction * acceleration;
+
+        transform.position += Time.deltaTime * velocity;
+
+        if (velocity.magnitude > maxSpeed)
+        {
+            velocity = maxSpeed * velocity.normalized;
+        }
+        
     }
 
 }
