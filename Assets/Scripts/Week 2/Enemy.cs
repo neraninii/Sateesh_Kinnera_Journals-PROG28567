@@ -98,7 +98,6 @@ public class Enemy : MonoBehaviour
         {
             timer = 0;
             GameObject Bomb = Instantiate(enemyBombPrefab, transform.position + transform.up, Quaternion.identity);
-            Bomb.GetComponent<Bomb>().player = transform;
 
         }
 
