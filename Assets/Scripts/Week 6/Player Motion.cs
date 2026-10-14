@@ -133,20 +133,4 @@ public class PlayerMotion : MonoBehaviour
 
 
     }
-
-    public void OrbitalMotion(float radius, float speed, Transform target)
-    {
-
-        angle += Time.deltaTime * speed; 
-        float angleInRads = angle * Mathf.Deg2Rad;
-
-        float xPos = Mathf.Cos(angleInRads);
-        float yPos = Mathf.Sin(angleInRads);
-
-        Vector3 offset = new Vector3(xPos, yPos, 0f);
-
-        transform.position = target.position + offset * radius;
-
-        
-    }
 }
