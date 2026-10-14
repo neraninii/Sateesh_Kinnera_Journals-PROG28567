@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using System.Threading;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
         PlayerDetection();
     }
 
-    public void RandomAsteroidWarp()
+    /**public void RandomAsteroidWarp()
     {
         //conditional to reset the motion to 0 as well as generate a new asteroid to move to every key press
         if (Keyboard.current.eKey.wasPressedThisFrame)
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
         transform.position = currentPosition * speed;
         
 
-    }
+    }**/
 
     public void PlayerFollowing()
     {

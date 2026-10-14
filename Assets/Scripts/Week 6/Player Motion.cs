@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMotion : MonoBehaviour
 {
+    public GameObject powerUpPrefab;
+    public Transform player; 
+    public List<GameObject> powerUps;
     public float accelerationTime = 1f;
     public float decelerationTime = 1f;
     public float maxSpeed = 1f;
@@ -13,6 +17,11 @@ public class PlayerMotion : MonoBehaviour
     private float acceleration;
     private float deceleration;
     private Vector3 velocity = Vector3.zero; 
+
+    public float orbitalRadius = 3f; 
+    public float orbitalSpeed = 2f;
+
+    public float angle; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +35,7 @@ public class PlayerMotion : MonoBehaviour
     {
         PlayerMovement();
         PlayerRotation();
+        playerPowerUp();
     }
 
     private void PlayerMovement()
@@ -111,5 +121,32 @@ public class PlayerMotion : MonoBehaviour
         return Mathf.DeltaAngle(angleA, angleB);
 
 
+    }
+
+    public void playerPowerUp()
+    {
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            GameObject powerUp = Instantiate(powerUpPrefab, transform.position + transform.up, Quaternion.identity); 
+            powerUp.GetComponent<PowerUp>().player = transform;
+        }
+
+
+    }
+
+    public void OrbitalMotion(float radius, float speed, Transform target)
+    {
+
+        angle += Time.deltaTime * speed; 
+        float angleInRads = angle * Mathf.Deg2Rad;
+
+        float xPos = Mathf.Cos(angleInRads);
+        float yPos = Mathf.Sin(angleInRads);
+
+        Vector3 offset = new Vector3(xPos, yPos, 0f);
+
+        transform.position = target.position + offset * radius;
+
+        
     }
 }
