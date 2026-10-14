@@ -308,6 +308,10 @@ PrefabInstance:
       value: Asteroid (6)
       objectReference: {fileID: 0}
     - target: {fileID: 8438977231294163930, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438977231294163930, guid: 462add3d0f7c62a4682e9c053b00ec93, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 979844610}

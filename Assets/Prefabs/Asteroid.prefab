@@ -145,4 +145,4 @@ MonoBehaviour:
   x: 0
   y: 0
   player: {fileID: 0}
-  speed: 2
+  speed: 4
