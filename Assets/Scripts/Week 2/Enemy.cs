@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public float speed = 0;
     public float motion = 0;
     public List<Transform> asteroidTransforms;
-    Vector3 asteroidPos;
+
 
     public Transform player; 
     public float maxSpeed = 1f; 
@@ -57,16 +57,21 @@ public class Enemy : MonoBehaviour
 
     }**/
 
+    //Vector Mechanic 1: Enemy Tracking
     public void PlayerFollowing()
     {
+        //Adding acceleration 
         acceleration = maxSpeed/accelerationTime; 
 
+        //Finding the direction 
         Vector3 direction = (player.position - transform.position).normalized; 
 
+        //Adding velocity 
         velocity += Time.deltaTime * direction * acceleration;
 
         transform.position += Time.deltaTime * velocity;
 
+        //Conditional to set the limit of the enemy's speed
         if (velocity.magnitude > maxSpeed)
         {
             velocity = maxSpeed * velocity.normalized;
@@ -74,6 +79,7 @@ public class Enemy : MonoBehaviour
         
     }
 
+    //Rotation Mechanic 1: Enemy Rotation Tracking 
     public void PlayerDetection()
     {
         Vector3 direction = (player.position - transform.position).normalized;
@@ -99,10 +105,10 @@ public class Enemy : MonoBehaviour
             timer = 0;
             GameObject Bomb = Instantiate(enemyBombPrefab, transform.position + transform.up, Quaternion.identity);
 
-        }
+        } 
 
 
-    }
+    } 
 
     private float ComputeShortestAngle(Vector3 a, Vector3 b)
     {

@@ -34,14 +34,14 @@ public class Asteroid : MonoBehaviour
         PlayerContact();
 
         //Checking asteroid movement
-        if (Keyboard.current.aKey.isPressed)
+        /**if (Keyboard.current.aKey.isPressed)
         {
           AsteroidMovement();  
-        }
+        }**/
         
     }
 
-    public void AsteroidMovement()
+    /** public void AsteroidMovement()
     {
         // conditional to check when to choose new random points with a boolean
         if (chooseRandom == true)
@@ -78,11 +78,13 @@ public class Asteroid : MonoBehaviour
 
 
 
-    }
+    }**/
 
-
+    //Vector Mechanic 2: Asteroid Bump
     public void PlayerContact()
     {
+        x = transform.position.x;
+        y = transform.position.y;
 
         float distanceToAsteroid = Vector3.Distance(transform.position, player.position);
         Vector3 oppositeDirection = transform.position - player.position; 

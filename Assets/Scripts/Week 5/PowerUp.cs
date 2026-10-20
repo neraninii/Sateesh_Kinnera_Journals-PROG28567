@@ -22,6 +22,8 @@ public class PowerUp : MonoBehaviour
         OrbitalMotion(orbitalRadius, orbitalSpeed, player);
     }
 
+    //Rotation Mechanic 2: Power Up Orbit
+
     public void OrbitalMotion(float radius, float speed, Transform target)
     {
 
