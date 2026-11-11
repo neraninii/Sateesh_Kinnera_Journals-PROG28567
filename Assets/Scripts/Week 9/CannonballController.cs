@@ -7,4 +7,14 @@ public class CannonballController : MonoBehaviour
     {
         Destroy(gameObject, 3);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Equals("Pirate Ship Target"))
+        {
+            ScoreboardController.Instance.Score += 1; 
+        }
+
+        Destroy(gameObject);
+    }
 }
