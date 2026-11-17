@@ -6,7 +6,7 @@ public class Experiment4 : MonoBehaviour
     public ContactFilter2D contactFilter; 
     public Collider2D[] overlappedObjects = new Collider2D[5];
 
-    public int overlapCount;
+    public int collideCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,11 +17,11 @@ public class Experiment4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        overlapCount = Physics2D.OverlapCollider(triangleCollider, contactFilter, overlappedObjects);
+        collideCount = Physics2D.OverlapCollider(triangleCollider, contactFilter, overlappedObjects);
 
-        for(int i = 0; i < overlapCount; i++)
+        for(int i = 0; i < collideCount; i++)
         {
-            Debug.Log("overlap");
+            Debug.Log("triangle collide");
         }
     }
 }
