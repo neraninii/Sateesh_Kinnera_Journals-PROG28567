@@ -22,7 +22,7 @@ public class Experiment2 : MonoBehaviour
 
          if (numberOfSquares > 0)
         {
-            Debug.Log("Contact Made");
+            //Debug.Log("Contact Made");
         }
 
     }

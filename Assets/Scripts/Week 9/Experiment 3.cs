@@ -20,7 +20,7 @@ public class Experiment3 : MonoBehaviour
         {
            if(rb2D.OverlapPoint(mousePos))
             {
-                Debug.Log("Overlapped");
+                //Debug.Log("Overlapped");
                 rb2D.gravityScale = 1;
             }
             
