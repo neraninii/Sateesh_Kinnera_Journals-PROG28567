@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
 
     public FacingDirection currentDirection;
+
+    public List<Collider2D> platforms = new List<Collider2D>();
+
+    public int platformNumber; 
 
     public enum FacingDirection
     {
@@ -20,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        contactCheck();
         
         Vector2 playerInput = new Vector2();
 
@@ -57,9 +65,22 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void contactCheck()
+    {
+        platformNumber = rb2D.GetContacts(platforms);
+
+    }
     public bool IsGrounded()
     {
-        return false;
+        if (platformNumber > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public FacingDirection GetFacingDirection()
