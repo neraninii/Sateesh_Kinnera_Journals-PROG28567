@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb2D; 
     public float moveSpeed = 5f;
 
+    public FacingDirection currentDirection;
+
     public enum FacingDirection
     {
         left, right
@@ -45,7 +47,15 @@ public class PlayerController : MonoBehaviour
 
     public bool IsWalking()
     {
-        return false;
+        if (rb2D.linearVelocityX != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
     public bool IsGrounded()
     {
@@ -54,6 +64,16 @@ public class PlayerController : MonoBehaviour
 
     public FacingDirection GetFacingDirection()
     {
-        return FacingDirection.left;
+        if (rb2D.linearVelocityX > 0)
+        {
+            currentDirection = FacingDirection.right;
+        }
+        else if (rb2D.linearVelocityX < 0)
+        {
+            currentDirection = FacingDirection.left;
+        }
+        
+        return currentDirection;
+      
     }
 }
